@@ -27,5 +27,5 @@ public class Dealer {
 
 	@Column
 	private LocalDateTime createdOn = LocalDateTime.now();
-	
+
 }

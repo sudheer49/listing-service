@@ -25,31 +25,31 @@ public class Listing {
 
 	@Column
 	private String code;
-	
+
 	@Column
 	private String make;
-	
+
 	@Column
 	private String model;
-	
+
 	@Column
 	private double power;
-	
+
 	@Column
 	private int year;
-	
+
 	@Column
 	private String color;
-	
+
 	@Column
 	private double price;
-	
+
 	@ManyToOne
 	private Dealer dealer;
-	
+
 	@Column
 	private LocalDateTime createdOn = LocalDateTime.now();
-	
+
 	@Column
 	private LocalDateTime updatedOn = LocalDateTime.now();
 
@@ -64,5 +64,5 @@ public class Listing {
 		this.price = price;
 		this.dealer = dealer;
 	}
-	
+
 }
