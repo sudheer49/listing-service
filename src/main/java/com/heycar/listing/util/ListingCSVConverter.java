@@ -12,8 +12,12 @@ import com.opencsv.bean.CsvToBeanBuilder;
 
 public class ListingCSVConverter {
 
-	public static List<ListingDto> convertCSVToListingCSV(final MultipartFile file) throws IOException {
-		
+	private ListingCSVConverter() {
+		super();
+	}
+
+	public static List<ListingDto> convertCSVToListingDto(final MultipartFile file) throws IOException {
+
 		Reader reader = new InputStreamReader(file.getInputStream());
 		return new CsvToBeanBuilder<ListingDto>(reader).withType(ListingDto.class).build().parse();
 
