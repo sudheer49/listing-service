@@ -6,6 +6,8 @@ import com.heycar.listing.entity.Listing;
 
 public class ListingServiceUtil {
 
+	private static final Double KW_TO_PS = 1.36;
+
 	private ListingServiceUtil() {
 		super();
 	}
@@ -16,6 +18,6 @@ public class ListingServiceUtil {
 	}
 
 	public static double convertKWtoPS(double power) {
-		return 1.36 * power;
+		return KW_TO_PS * power;
 	}
 }

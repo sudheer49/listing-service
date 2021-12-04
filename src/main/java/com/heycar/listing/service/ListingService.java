@@ -1,6 +1,5 @@
 package com.heycar.listing.service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,7 +41,7 @@ public class ListingService {
 		return "Listings are created successfully";
 	}
 
-	public String createListingsCSV(MultipartFile file, Long dealerId) throws IOException {
+	public String createListingsCSV(MultipartFile file, Long dealerId) {
 
 		List<ListingDto> listingDtos = ListingCSVConverter.convertCSVToListingDto(file);
 		persistListings(listingDtos, dealerId);
@@ -60,10 +59,11 @@ public class ListingService {
 		List<Listing> listings = listingDtos.stream()
 				.map(listing -> ListingServiceUtil.convertListingDtoToListing(listing, dealer.get()))
 				.collect(Collectors.toList());
+
 		log.info("Persisting Listings in DB for Dealer " + dealerId);
-		
+
 		listingRepository.saveAll(listings);
-		
+
 		log.info("Successfully persited Listings in DB");
 	}
 

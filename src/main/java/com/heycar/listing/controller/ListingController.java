@@ -1,6 +1,5 @@
 package com.heycar.listing.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class ListingController {
 
 	@PostMapping("/upload_csv/{dealerId}")
 	public ResponseEntity<String> createListingsCSV(@PathVariable Long dealerId,
-			@RequestParam("file") MultipartFile file) throws IOException {
+			@RequestParam("file") MultipartFile file) {
 		return new ResponseEntity<>(listingService.createListingsCSV(file, dealerId), HttpStatus.CREATED);
 	}
 }
