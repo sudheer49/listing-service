@@ -1,10 +1,12 @@
 package com.heycar.listing.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,10 +14,12 @@ import com.heycar.listing.dto.ListingDto;
 import com.heycar.listing.entity.Dealer;
 import com.heycar.listing.entity.Listing;
 import com.heycar.listing.exception.DealerNotFountException;
+import com.heycar.listing.exception.InvalidSearchParamException;
 import com.heycar.listing.repository.DealerRepository;
 import com.heycar.listing.repository.ListingRepository;
 import com.heycar.listing.util.ListingCSVConverter;
 import com.heycar.listing.util.ListingServiceUtil;
+import com.heycar.listing.util.ListingSpecification;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,6 +30,9 @@ public class ListingService {
 	private ListingRepository listingRepository;
 
 	private DealerRepository dealerRepository;
+
+	@Value("${search-parms}")
+	private List<String> searchParms;
 
 	@Autowired
 	public ListingService(ListingRepository listingRepository, DealerRepository dealerRepository) {
@@ -47,6 +54,16 @@ public class ListingService {
 		persistListings(listingDtos, dealerId);
 
 		return "Listings are created successfully";
+	}
+
+	public List<ListingDto> retriveListings(Map<String, String> params) {
+
+		if (!searchParms.containsAll(params.keySet())) {
+			throw new InvalidSearchParamException(String.format("Allowed parameters for serach are %s", searchParms));
+		}
+
+		List<Listing> listings = listingRepository.findAll(ListingSpecification.searchSepecification(params));
+		return listings.stream().map(ListingServiceUtil::convertListingToListingDto).collect(Collectors.toList());
 	}
 
 	private void persistListings(List<ListingDto> listingDtos, Long dealerId) {
@@ -76,7 +93,7 @@ public class ListingService {
 
 		listingRepository.saveAll(listings);
 
-		log.info("Successfully persited Listings in DB");
+		log.info("Successfully persited {} Listings in DB", listings.size());
 	}
 
 }

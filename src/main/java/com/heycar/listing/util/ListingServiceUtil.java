@@ -30,6 +30,11 @@ public class ListingServiceUtil {
 		return listing;
 	}
 
+	public static ListingDto convertListingToListingDto(Listing listing) {
+		return new ListingDto(listing.getCode(), listing.getMake(), listing.getModel(), listing.getPower(),
+				listing.getYear(), listing.getColor(), listing.getPrice());
+	}
+
 	public static double convertKWtoPS(double power) {
 		return KW_TO_PS * power;
 	}

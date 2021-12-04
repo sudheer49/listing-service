@@ -22,7 +22,6 @@ public class ListingDto {
 	private String model;
 
 	@CsvBindByName(column = "power-in-ps")
-	@JsonProperty("kW")
 	private double power;
 
 	@CsvBindByName
@@ -33,5 +32,15 @@ public class ListingDto {
 
 	@CsvBindByName
 	private double price;
+
+	@JsonProperty("power-in-ps")
+	public double getPower() {
+		return power;
+	}
+
+	@JsonProperty("kW")
+	public void setPower(double power) {
+		this.power = power;
+	}
 
 }

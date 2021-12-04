@@ -20,3 +20,9 @@ spring:
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
+
+search-parms: >
+  make,
+  model,
+  year,
+  color
