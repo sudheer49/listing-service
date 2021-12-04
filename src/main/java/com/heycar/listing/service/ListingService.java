@@ -56,9 +56,21 @@ public class ListingService {
 			log.error("There is no Dealer present with delear id: " + dealerId);
 			throw new DealerNotFountException("There is no Dealer present with delear id: " + dealerId);
 		}
+
+		List<Listing> availableListings = listingRepository.findByCodeInAndDealer(
+				listingDtos.stream().map(ListingDto::getCode).collect(Collectors.toList()), dealer.get());
+
+		availableListings.forEach(a -> {
+			ListingDto lDto = listingDtos.stream().filter(l -> l.getCode().equals(a.getCode())).findFirst().get();
+			ListingServiceUtil.updateListingWithDto(a, lDto);
+			listingDtos.remove(lDto);
+		});
+
 		List<Listing> listings = listingDtos.stream()
 				.map(listing -> ListingServiceUtil.convertListingDtoToListing(listing, dealer.get()))
 				.collect(Collectors.toList());
+
+		listings.addAll(availableListings);
 
 		log.info("Persisting Listings in DB for Dealer " + dealerId);
 
