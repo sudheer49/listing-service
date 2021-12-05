@@ -23,6 +23,12 @@ import com.heycar.listing.util.ListingSpecification;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Service class which is having all the methods related to ListingController
+ * 
+ * @author Satya Kolipaka
+ *
+ */
 @Slf4j
 @Service
 public class ListingService {
@@ -40,6 +46,14 @@ public class ListingService {
 		this.dealerRepository = dealerRepository;
 	}
 
+	/**
+	 * Create or Update Listings for specific Dealer. It converts KW to PS before
+	 * create listings
+	 * 
+	 * @param listingDtos
+	 * @param dealerId
+	 * @return
+	 */
 	public String createListings(List<ListingDto> listingDtos, Long dealerId) {
 
 		listingDtos.stream().forEach(l -> l.setPower(ListingServiceUtil.convertKWtoPS(l.getPower())));
@@ -48,6 +62,14 @@ public class ListingService {
 		return "Listings are created successfully";
 	}
 
+	/**
+	 * Create or Update Listings for specific Dealer. It converts CSV file to
+	 * Listing entity
+	 * 
+	 * @param file
+	 * @param dealerId
+	 * @return
+	 */
 	public String createListingsCSV(MultipartFile file, Long dealerId) {
 
 		List<ListingDto> listingDtos = ListingCSVConverter.convertCSVToListingDto(file);
@@ -56,7 +78,13 @@ public class ListingService {
 		return "Listings are created successfully";
 	}
 
-	public List<ListingDto> retriveListings(Map<String, String> params) {
+	/**
+	 * Retrieve all available Listings on the system based on search params
+	 * 
+	 * @param params
+	 * @return
+	 */
+	public List<ListingDto> retrieveListings(Map<String, String> params) {
 
 		if (!searchParms.containsAll(params.keySet())) {
 			throw new InvalidSearchParamException(String.format("Allowed parameters for serach are %s", searchParms));
@@ -66,6 +94,12 @@ public class ListingService {
 		return listings.stream().map(ListingServiceUtil::convertListingToListingDto).collect(Collectors.toList());
 	}
 
+	/**
+	 * Method to convert List of ListingDto to entities and Persist data in DB
+	 * 
+	 * @param listingDtos
+	 * @param dealerId
+	 */
 	private void persistListings(List<ListingDto> listingDtos, Long dealerId) {
 
 		Optional<Dealer> dealer = dealerRepository.findById(dealerId);

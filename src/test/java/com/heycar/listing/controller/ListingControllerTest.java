@@ -27,6 +27,12 @@ import com.heycar.listing.exception.ExceptionControllerAdvice;
 import com.heycar.listing.service.ListingService;
 import com.heycar.listing.util.ListingServiceUtilTest;
 
+/**
+ * Unit Test class for ListingController
+ * 
+ * @author Satya Kolipaka
+ *
+ */
 @RunWith(SpringRunner.class)
 @ExtendWith(MockitoExtension.class)
 class ListingControllerTest {
@@ -84,7 +90,7 @@ class ListingControllerTest {
 	@Test
 	void retriveListings_Success() throws Exception {
 
-		when(listingServiceMock.retriveListings(any(Map.class))).thenReturn(ListingServiceUtilTest.buildListingDtos());
+		when(listingServiceMock.retrieveListings(any(Map.class))).thenReturn(ListingServiceUtilTest.buildListingDtos());
 
 		this.mockMvc.perform(get("/hey-car/search?make=vw&model=golf&year=2018&color=green")).andExpect(status().isOk())
 				.andExpect(jsonPath("$.[0].code").value("a")).andExpect(jsonPath("$.[0].model").value("megane"))

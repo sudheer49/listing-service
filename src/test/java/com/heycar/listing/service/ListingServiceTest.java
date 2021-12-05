@@ -32,6 +32,12 @@ import com.heycar.listing.repository.DealerRepository;
 import com.heycar.listing.repository.ListingRepository;
 import com.heycar.listing.util.ListingServiceUtilTest;
 
+/**
+ * Unit Test class for ListingService
+ * 
+ * @author Satya Kolipaka
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class ListingServiceTest {
@@ -121,7 +127,7 @@ class ListingServiceTest {
 		when(listingRepositoryMock.findAll(specificationsCaptor.capture()))
 				.thenReturn(ListingServiceUtilTest.buildListings());
 
-		List<ListingDto> response = listingService.retriveListings(params);
+		List<ListingDto> response = listingService.retrieveListings(params);
 		assertEquals(3, response.size());
 		assertEquals("renault", response.get(0).getMake());
 	}
@@ -131,7 +137,7 @@ class ListingServiceTest {
 
 		Map<String, String> params = Map.of("make", "renault", "price", "13990", "year", "2018");
 		assertThrows(InvalidSearchParamException.class, () -> {
-			listingService.retriveListings(params);
+			listingService.retrieveListings(params);
 		});
 	}
 

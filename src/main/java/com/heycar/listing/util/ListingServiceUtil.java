@@ -6,6 +6,12 @@ import com.heycar.listing.dto.ListingDto;
 import com.heycar.listing.entity.Dealer;
 import com.heycar.listing.entity.Listing;
 
+/**
+ * Utility class for Listing Service
+ * 
+ * @author Satya Kolipaka
+ *
+ */
 public class ListingServiceUtil {
 
 	private static final Double KW_TO_PS = 1.36;

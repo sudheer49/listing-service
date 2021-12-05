@@ -7,6 +7,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Dto class to hold Listing information
+ * 
+ * @author Satya Kolipaka
+ *
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

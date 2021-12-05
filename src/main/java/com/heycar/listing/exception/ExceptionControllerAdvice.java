@@ -50,16 +50,18 @@ public class ExceptionControllerAdvice {
 				"Please upload correct CSV fromat");
 		return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
 	}
-	
+
 	/**
+	 * This method helps to build the exception details if any search params are
+	 * wrong
 	 * 
 	 * @param exception
 	 * @return
 	 */
 	@ExceptionHandler(InvalidSearchParamException.class)
 	public ResponseEntity<ErrorDetailsDto> invalidSearchParamException(final InvalidSearchParamException exception) {
-		ErrorDetailsDto errorDetail = new ErrorDetailsDto(HttpStatus.BAD_REQUEST.value(), "Bad Request parameters for search",
-				exception.getMessage());
+		ErrorDetailsDto errorDetail = new ErrorDetailsDto(HttpStatus.BAD_REQUEST.value(),
+				"Bad Request parameters for search", exception.getMessage());
 		return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
 	}
 

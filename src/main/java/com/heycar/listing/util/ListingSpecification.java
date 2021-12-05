@@ -6,6 +6,12 @@ import org.springframework.data.jpa.domain.Specification;
 
 import com.heycar.listing.entity.Listing;
 
+/**
+ * Utility class to create JPA specifications
+ * 
+ * @author Satya Kolipaka
+ *
+ */
 public class ListingSpecification {
 
 	private ListingSpecification() {

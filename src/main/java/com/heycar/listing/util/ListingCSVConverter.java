@@ -15,6 +15,12 @@ import com.opencsv.bean.CsvToBeanBuilder;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Utility class to convert CSV to ListingDto Object
+ * 
+ * @author Satya Kolipaka
+ *
+ */
 @Slf4j
 public class ListingCSVConverter {
 

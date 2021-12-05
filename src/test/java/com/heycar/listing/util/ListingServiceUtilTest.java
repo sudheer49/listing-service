@@ -7,7 +7,17 @@ import com.heycar.listing.dto.ListingDto;
 import com.heycar.listing.entity.Dealer;
 import com.heycar.listing.entity.Listing;
 
+/**
+ * Utility class for Unit tests
+ * 
+ * @author Satya Kolipaka
+ *
+ */
 public class ListingServiceUtilTest {
+
+	private ListingServiceUtilTest() {
+		super();
+	}
 
 	public static List<ListingDto> buildListingDtos() {
 		return List.of(buildListingDtoOne(), buildListingDtoTwo(), buildListingDtoThree());
