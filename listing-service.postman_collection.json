@@ -1,0 +1,149 @@
+{
+	"variables": [],
+	"info": {
+		"name": "listing-service",
+		"_postman_id": "ec7f3bdb-9e42-a74a-1055-f5518bcb26a7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"request": {
+				"url": "http://localhost:8081/actuator/health",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "create listings JSON",
+			"request": {
+				"url": "http://localhost:8081/api/v1/hey-car/vehicle_listings/2",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n{\r\n\"code\": \"d\",\r\n\"make\": \"renault\",\r\n\"model\": \"megane\",\r\n\"kW\": 132,\r\n\"year\": 2014,\r\n\"color\": \"green\",\r\n\"price\": 13990\r\n},\r\n{\r\n\"code\": \"b\",\r\n\"make\": \"audi\",\r\n\"model\": \"a3\",\r\n\"kW\": 111,\r\n\"year\": 2018,\r\n\"color\": \"green\",\r\n\"price\": 17210\r\n}\r\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "create listings CSV",
+			"request": {
+				"url": "http://localhost:8081/api/v1/hey-car/upload_csv/1",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "file",
+						"value": "",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"description": "",
+							"type": "file",
+							"src": "upload.csv"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8081/api/v1/hey-car/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"hey-car",
+						"search"
+					],
+					"query": [
+						{
+							"key": "make",
+							"value": "vw",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						},
+						{
+							"key": "model",
+							"value": "golf",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						},
+						{
+							"key": "year",
+							"value": "2018",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						},
+						{
+							"key": "color",
+							"value": "green",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						},
+						{
+							"key": "trg",
+							"value": "t",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "search copy",
+			"request": {
+				"url": "http://localhost:8081/hey-car/search",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

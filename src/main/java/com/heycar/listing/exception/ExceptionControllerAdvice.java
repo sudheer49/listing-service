@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.heycar.listing.dto.ErrorDetailsDto;
 
+/**
+ * Centralized exception handler class for ListingController
+ * 
+ * @author Satya Kolipaka
+ *
+ */
 @ControllerAdvice
 public class ExceptionControllerAdvice {
 
@@ -32,7 +38,7 @@ public class ExceptionControllerAdvice {
 	 * @return
 	 */
 	@ExceptionHandler(FileTypeException.class)
-	public ResponseEntity<ErrorDetailsDto> fileFormatException(final FileTypeException exception) {
+	public ResponseEntity<ErrorDetailsDto> fileTypeException(final FileTypeException exception) {
 		ErrorDetailsDto errorDetail = new ErrorDetailsDto(HttpStatus.BAD_REQUEST.value(), "Bad file type ",
 				"Please upload only CSV file type");
 		return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);

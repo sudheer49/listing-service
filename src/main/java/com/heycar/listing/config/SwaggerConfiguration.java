@@ -37,7 +37,7 @@ public class SwaggerConfiguration {
 
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("Listing Service API")
-				.description("REST API Spec for Listing Service").contact(new Contact("Satya Kolipaka",
+				.description("REST API Specification for Listing Service").contact(new Contact("Satya Kolipaka",
 						"https://www.linkedin.com/in/satya-sudheer-kolipkaka-9288b89a/", "satyasudheer625@gmail.com"))
 				.version("1.0").build();
 	}

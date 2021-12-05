@@ -31,9 +31,9 @@ import io.swagger.annotations.ApiResponses;
  *
  */
 
-@Api
+@Api(tags = { "Operations pertaining to Listing Service deatils" })
 @RestController
-@RequestMapping("/hey-car")
+@RequestMapping("/api/v1/hey-car")
 public class ListingController {
 
 	@Autowired
@@ -46,13 +46,13 @@ public class ListingController {
 	 * @param listingDtos
 	 * @return
 	 */
-	@ApiOperation(value = "Create Listings", response = String.class, httpMethod = "POST")
+	@ApiOperation(value = "Create Listings via JSON", response = String.class, httpMethod = "POST")
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Successfully created Listings", response = String.class),
+			@ApiResponse(code = 204, message = "Successfully created Listings", response = String.class),
 			@ApiResponse(code = 404, message = "Dealer not available", response = ErrorDetailsDto.class),
 			@ApiResponse(code = 500, message = "Unexpected Internal Error", response = ErrorDetailsDto.class) })
 	@PostMapping("/vehicle_listings/{dealerId}")
-	public ResponseEntity<String> createListings(@PathVariable Long dealerId,
+	public ResponseEntity<String> createListings(@PathVariable(required = true) Long dealerId,
 			@RequestBody List<ListingDto> listingDtos) {
 		return new ResponseEntity<>(listingService.createListings(listingDtos, dealerId), HttpStatus.CREATED);
 	}
@@ -66,18 +66,18 @@ public class ListingController {
 	 */
 	@ApiOperation(value = "Create Listings via CSV file", response = String.class, httpMethod = "POST")
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Successfully created Listings", response = String.class),
+			@ApiResponse(code = 204, message = "Successfully created Listings", response = String.class),
 			@ApiResponse(code = 404, message = "Dealer not available", response = ErrorDetailsDto.class),
 			@ApiResponse(code = 400, message = "Bad type/format of CSV", response = ErrorDetailsDto.class),
 			@ApiResponse(code = 500, message = "Unexpected Internal Error", response = ErrorDetailsDto.class) })
 	@PostMapping("/upload_csv/{dealerId}")
-	public ResponseEntity<String> createListingsCSV(@PathVariable Long dealerId,
+	public ResponseEntity<String> createListingsCSV(@PathVariable(required = true) Long dealerId,
 			@RequestParam("file") MultipartFile file) {
 		return new ResponseEntity<>(listingService.createListingsCSV(file, dealerId), HttpStatus.CREATED);
 	}
 
 	/**
-	 * End point to retrieve the Listings for specific Dealer via CSV upload
+	 * End point to search the Listings by using make/model/year/color
 	 * 
 	 * @param params
 	 * @return

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- Note: Intentionally, did not use the template features provided by Spring Boot in case of logback-spring.xml 
+	For Example: <include resource="org/springframework/boot/logging/logback/defaults.xml" /> -->
+	<!-- All log files located in logs file of the project -->
+	<property name="LOGS" value="./logs" />
+	<property name="FILE_LOG_PATTERN"
+		value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} -%msg%n" />
+	<!-- Define the console log format -->
+	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>${FILE_LOG_PATTERN}</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="RollingFileBySizeAndTime" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOGS}/listing-service.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${LOGS}/archived/listing-service-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<!-- As you can see it contains the maxFileSize, maxHistory and totalSizeCap 
+				providing it control over the size of individual files as well as the collection 
+				of files. Therefore the above example will keep 6 days worth of history split 
+				into files of 1MB and when the total size of all files reaches 3MB the oldest 
+				files will be removed. -->
+			<maxFileSize>1MB</maxFileSize>
+			<maxHistory>6</maxHistory>
+			<totalSizeCap>3MB</totalSizeCap>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>${FILE_LOG_PATTERN}</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- LOG everything at error level -->
+	<root level="error">
+		<appender-ref ref="RollingFileBySizeAndTime" />
+		<appender-ref ref="Console" />
+	</root>
+
+</configuration>

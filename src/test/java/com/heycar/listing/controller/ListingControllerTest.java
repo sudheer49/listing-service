@@ -63,7 +63,7 @@ class ListingControllerTest {
 				.thenReturn("Listings are created successfully");
 
 		this.mockMvc
-				.perform(post("/hey-car/vehicle_listings/{dealerId}", 1L).contentType(MediaType.APPLICATION_JSON)
+				.perform(post("/api/v1/hey-car/vehicle_listings/{dealerId}", 1L).contentType(MediaType.APPLICATION_JSON)
 						.content(json).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isCreated()).andExpect(jsonPath("$").value("Listings are created successfully"));
 	}
@@ -81,18 +81,18 @@ class ListingControllerTest {
 				.thenThrow(DealerNotFountException.class);
 
 		this.mockMvc
-				.perform(post("/hey-car/vehicle_listings/{dealerId}", 5L).contentType(MediaType.APPLICATION_JSON)
+				.perform(post("/api/v1/hey-car/vehicle_listings/{dealerId}", 5L).contentType(MediaType.APPLICATION_JSON)
 						.content(json).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound()).andExpect(jsonPath("$.title").value("Dealer not available"));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test
-	void retriveListings_Success() throws Exception {
+	void retrieveListings_Success() throws Exception {
 
 		when(listingServiceMock.retrieveListings(any(Map.class))).thenReturn(ListingServiceUtilTest.buildListingDtos());
 
-		this.mockMvc.perform(get("/hey-car/search?make=vw&model=golf&year=2018&color=green")).andExpect(status().isOk())
+		this.mockMvc.perform(get("/api/v1/hey-car/search?make=vw&model=golf&year=2018&color=green")).andExpect(status().isOk())
 				.andExpect(jsonPath("$.[0].code").value("a")).andExpect(jsonPath("$.[0].model").value("megane"))
 				.andExpect(jsonPath("$.[1].make").value("mercedes"))
 				.andExpect(jsonPath("$.[1].power-in-ps").value("123.0")).andExpect(jsonPath("$.[2].year").value("2018"))

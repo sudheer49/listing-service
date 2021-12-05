@@ -2,7 +2,7 @@ package com.heycar.listing.exception;
 
 /**
  * This class is custom exception class which will be thrown if the there is
- * error while converting csv to ListingDto
+ * error while converting CSV to ListingDtos
  * 
  * @author Satya Kolipaka
  *

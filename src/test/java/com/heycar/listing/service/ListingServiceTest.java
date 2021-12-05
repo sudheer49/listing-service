@@ -120,7 +120,7 @@ class ListingServiceTest {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Test
-	void retriveListings_Success() {
+	void retrieveListings_Success() {
 
 		ArgumentCaptor<Specification> specificationsCaptor = ArgumentCaptor.forClass(Specification.class);
 		Map<String, String> params = Map.of("make", "renault", "model", "megane", "year", "2018");
@@ -133,7 +133,7 @@ class ListingServiceTest {
 	}
 
 	@Test
-	void retriveListings_Error() {
+	void retrieveListings_Error() {
 
 		Map<String, String> params = Map.of("make", "renault", "price", "13990", "year", "2018");
 		assertThrows(InvalidSearchParamException.class, () -> {

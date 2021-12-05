@@ -104,8 +104,9 @@ public class ListingService {
 
 		Optional<Dealer> dealer = dealerRepository.findById(dealerId);
 		if (dealer.isEmpty()) {
-			log.error("There is no Dealer present with delear id: " + dealerId);
-			throw new DealerNotFountException("There is no Dealer present with delear id: " + dealerId);
+			log.error("There is no Dealer present with delear id:{} ", dealerId);
+			throw new DealerNotFountException(
+					String.format("There is no Dealer present with delear id: %s ", dealerId));
 		}
 
 		List<Listing> availableListings = listingRepository.findByCodeInAndDealer(
@@ -123,7 +124,7 @@ public class ListingService {
 
 		listings.addAll(availableListings);
 
-		log.info("Persisting Listings in DB for Dealer " + dealerId);
+		log.info("Persisting Listings in DB for Dealer {} ", dealerId);
 
 		listingRepository.saveAll(listings);
 

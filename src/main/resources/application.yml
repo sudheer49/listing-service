@@ -21,7 +21,7 @@ spring:
     hibernate:
       ddl-auto: update
 
-####### Search Params for Listing serach
+####### Search Params for Listing serach binding to Listing Entity
 search-parms: >
   make,
   model,

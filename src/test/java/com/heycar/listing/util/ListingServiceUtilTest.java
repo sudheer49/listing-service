@@ -28,7 +28,7 @@ public class ListingServiceUtilTest {
 	}
 
 	public static Dealer buildDealer() {
-		return new Dealer(1L, "Satya", LocalDateTime.now());
+		return new Dealer(1L, "BMW Dealer", LocalDateTime.now());
 	}
 
 	private static ListingDto buildListingDtoOne() {
