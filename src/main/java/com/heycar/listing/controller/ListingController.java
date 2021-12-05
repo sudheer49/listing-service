@@ -38,7 +38,7 @@ public class ListingController {
 	}
 
 	@GetMapping("/search")
-	public ResponseEntity<List<ListingDto>> retriveListings(@RequestParam Map<String,String> params) {
+	public ResponseEntity<List<ListingDto>> retriveListings(@RequestParam Map<String, String> params) {
 		return new ResponseEntity<>(listingService.retriveListings(params), HttpStatus.OK);
 	}
 }
